@@ -9,7 +9,7 @@ from pathlib import Path
 import pytz
 from dateutil import tz
 from sqlalchemy import MetaData
-from flask import render_template
+from flask import render_template, current_app
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 from flask_msearch import Search
@@ -20,9 +20,6 @@ from datetime import datetime
 from flask_se_config import (
     post_ranking_score,
     get_hours_since,
-    SQLITE_DATABASE_NAME,
-    SQLITE_DATABASE_BACKUP_NAME,
-    SQLITE_DATABASE_PATH,
 )
 
 convention = {
@@ -3008,16 +3005,16 @@ def init_db():
     ]
 
     # Check if databases directory exists. If not, create it
-    db_dir = Path(SQLITE_DATABASE_PATH)
+    db_dir = Path(current_app.config["SQLITE_DATABASE_PATH"])
     if not db_dir.exists():
         db_dir.mkdir()
 
     # Check if db file already exists. If so, backup it
-    db_file = Path(SQLITE_DATABASE_PATH + SQLITE_DATABASE_NAME)
+    db_file = Path(current_app.config["SQLITE_DATABASE_PATH"] + current_app.config["SQLITE_DATABASE_NAME"])
     if db_file.is_file():
         shutil.copyfile(
-            SQLITE_DATABASE_PATH + SQLITE_DATABASE_NAME,
-            SQLITE_DATABASE_PATH + SQLITE_DATABASE_BACKUP_NAME,
+            current_app.config["SQLITE_DATABASE_PATH"] + current_app.config["SQLITE_DATABASE_NAME"],
+            current_app.config["SQLITE_DATABASE_PATH"] + current_app.config["SQLITE_DATABASE_BACKUP_NAME"],
         )
 
     # Init DB

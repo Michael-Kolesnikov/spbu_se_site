@@ -3,10 +3,10 @@
 import smtplib, ssl
 
 from se_models import db, Notification, Users, DiplomaThemes
-from flask_se_config import MAIL_PASSWORD
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.header import Header
+from flask import current_app
 
 MAIL_DEFAULT_SENDER = "sysprog_notification@spbu.ru"
 MAIL_DEFAULT_SENDER_STRING = "SE уведомления <sysprog_notification@spbu.ru>"
@@ -36,7 +36,7 @@ def notification_send_mail():
 
         try:
             server.ehlo()
-            server.login(MAIL_DEFAULT_SENDER, MAIL_PASSWORD)
+            server.login(MAIL_DEFAULT_SENDER, current_app.config["MAIL_PASSWORD"])
 
         except smtplib.SMTPHeloError:
             print("The server didn’t reply properly to the HELO greeting.")
@@ -45,7 +45,7 @@ def notification_send_mail():
                 "The server didn’t accept the username/password combination. Username:"
                 + MAIL_DEFAULT_SENDER
                 + ", PASS:"
-                + MAIL_PASSWORD
+                + current_app.config["MAIL_PASSWORD"]
             )
         except smtplib.SMTPNotSupportedError:
             print("The AUTH command is not supported by the server.")
@@ -112,7 +112,7 @@ def notification_send_diploma_themes_on_review():
 
     try:
         server.ehlo()
-        server.login(MAIL_DEFAULT_SENDER, MAIL_PASSWORD)
+        server.login(MAIL_DEFAULT_SENDER, current_app.config["MAIL_PASSWORD"])
 
     except smtplib.SMTPHeloError:
         print("The server didn’t reply properly to the HELO greeting.")
@@ -121,7 +121,7 @@ def notification_send_diploma_themes_on_review():
             "The server didn’t accept the username/password combination. Username:"
             + MAIL_DEFAULT_SENDER
             + ", PASS:"
-            + MAIL_PASSWORD
+            + current_app.config["MAIL_PASSWORD"]
         )
     except smtplib.SMTPNotSupportedError:
         print("The AUTH command is not supported by the server.")

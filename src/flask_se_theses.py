@@ -12,9 +12,10 @@ from urllib.parse import urlparse
 from flask import render_template, request, jsonify, redirect, url_for
 from transliterate import translit
 
-from flask_se_config import SECRET_KEY_THESIS
 from se_forms import ThesisFilter
 from se_models import db, Staff, Users, Thesis, Worktype, Courses
+
+from flask import current_app
 
 log = logging.getLogger("flask_se.sub")
 
@@ -289,7 +290,7 @@ def post_theses():
     except KeyError as e:
         return jsonify(status=error_status, string="Key " + str(e) + " not found")
 
-    if secret_key != SECRET_KEY_THESIS:
+    if secret_key != current_app.config["SECRET_KEY_THESIS"]:
         return jsonify(
             status=error_status, string="Invalid secret key: " + str(secret_key)
         )

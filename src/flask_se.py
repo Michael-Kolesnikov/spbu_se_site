@@ -17,10 +17,6 @@ from flask_simplemde import SimpleMDE
 
 import flask_se_theses
 from flask_se_config import (
-    SECRET_KEY_THESIS,
-    SECRET_KEY,
-    SQLITE_DATABASE_NAME,
-    SQLITE_DATABASE_PATH,
     plural_hours,
     get_hours_since,
 )
@@ -144,36 +140,15 @@ from flask_se_practice_admin import (
     archive_thesis,
 )
 from flask_se_practice_yandex_disk import yandex_code
-
+from config import Config
 app = Flask(
     __name__,
     static_url_path="",
     static_folder="static",
     template_folder="templates",
-    instance_path=SQLITE_DATABASE_PATH,
+    instance_path=Config.SQLITE_DATABASE_PATH,
 )
-
-# Flask configs
-app.config["APPLICATION_ROOT"] = "/"
-
-# Freezer config
-app.config["FREEZER_RELATIVE_URLS"] = True
-app.config["FREEZER_DESTINATION"] = "../docs"
-app.config["FREEZER_IGNORE_MIMETYPE_WARNINGS"] = True
-
-# SQLAlchimy config
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + SQLITE_DATABASE_NAME
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
-app.config["SECRET_KEY"] = SECRET_KEY
-app.config["SESSION_COOKIE_NAME"] = "se_session"
-
-# Secret for API
-app.config["SECRET_KEY_THESIS"] = SECRET_KEY_THESIS
-
-# Basci auth config
-app.config["BASIC_AUTH_USERNAME"] = "se_staff"
-app.config["BASIC_AUTH_PASSWORD"] = app.config["SECRET_KEY_THESIS"]
-
+app.config.from_object(Config)
 
 # App add_url_rule
 # Login
@@ -393,7 +368,7 @@ search.init_app(app)
 # Init Migrate
 migrate = Migrate(app, db, render_as_batch=True)
 
-app.logger.error("SECRET_KEY_THESIS: %s", str(app.config["SECRET_KEY_THESIS"]))
+app.logger.error("SECRET_KEY_THESIS: %s", str(Config.SECRET_KEY_THESIS))
 
 # Init Freezer
 freezer = Freezer(app)

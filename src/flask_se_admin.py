@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from flask import redirect, url_for, session, render_template
+from flask import redirect, url_for, session, render_template, current_app
 from flask_admin import AdminIndexView, expose
 from flask_admin.contrib.sqla import ModelView
 from flask_admin.contrib.sqla.fields import QuerySelectField
 from flask_login import current_user
 from wtforms import TextAreaField, SelectField
 
-from flask_se_config import SECRET_KEY_THESIS
 from se_models import (
     db,
     Users,
@@ -100,7 +99,7 @@ class SeAdminModelViewReviewer(ModelView):
 class SeAdminIndexView(AdminIndexView):
     @expose("/")
     def index(self):
-        thesis_key = SECRET_KEY_THESIS
+        thesis_key = current_app.config["SECRET_KEY_THESIS"]
         return self.render("admin/index.html", thesis_key=thesis_key)
 
     def is_accessible(self):
