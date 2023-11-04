@@ -358,8 +358,6 @@ app.add_url_rule(
 db.app = app
 db.init_app(app)
 
-app.config["MSEARCH_BACKEND"] = "whoosh"
-app.config["MSEARCH_ENABLE"] = True
 search.init_app(app)
 # search.create_index(Thesis, update=True)
 # search.create_index(Users, update=True)
@@ -400,7 +398,6 @@ def notification_send_diploma_themes_on_review_wrapper():
 
 
 # Init APScheduler
-app.config["SCHEDULER_TIMEZONE"] = "UTC"
 scheduler = APScheduler()
 scheduler.add_job(
     id="RecalculatePostRank",
@@ -444,8 +441,6 @@ admin.add_view(
 admin.add_view(SeAdminModelViewCurrentThesis(CurrentThesis, db.session))
 
 # Init SimpleMDE
-app.config["SIMPLEMDE_JS_IIFE"] = True
-app.config["SIMPLEMDE_USE_CDN"] = False
 SimpleMDE(app)
 
 

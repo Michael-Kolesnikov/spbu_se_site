@@ -32,10 +32,16 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = "sqlite:///" + SQLITE_DATABASE_NAME
     SECRET_KEY = SECRET_KEY
     SESSION_COOKIE_NAME = "se_session"
-
     # Secret for API
     SECRET_KEY_THESIS = SECRET_KEY_THESIS
-
     # Basic auth config
     BASIC_AUTH_USERNAME = "se_staff"
     BASIC_AUTH_PASSWORD = SECRET_KEY_THESIS
+    # Db
+    MSEARCH_BACKEND = "whoosh"
+    MSEARCH_ENABLE = True
+    # APScheduler
+    SCHEDULER_TIMEZONE = "UTC"
+    # SimpleMDE
+    SIMPLEMDE_JS_IIFE = True
+    SIMPLEMDE_USE_CDN = False
