@@ -3010,11 +3010,15 @@ def init_db():
         db_dir.mkdir()
 
     # Check if db file already exists. If so, backup it
-    db_file = Path(current_app.config["SQLITE_DATABASE_PATH"] + current_app.config["SQLITE_DATABASE_NAME"])
+    db_file = Path(
+        current_app.config["SQLITE_DATABASE_PATH"]
+        + current_app.config["SQLITE_DATABASE_NAME"])
     if db_file.is_file():
         shutil.copyfile(
-            current_app.config["SQLITE_DATABASE_PATH"] + current_app.config["SQLITE_DATABASE_NAME"],
-            current_app.config["SQLITE_DATABASE_PATH"] + current_app.config["SQLITE_DATABASE_BACKUP_NAME"],
+            current_app.config["SQLITE_DATABASE_PATH"]
+            + current_app.config["SQLITE_DATABASE_NAME"],
+            current_app.config["SQLITE_DATABASE_PATH"]
+            + current_app.config["SQLITE_DATABASE_BACKUP_NAME"],
         )
 
     # Init DB

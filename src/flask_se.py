@@ -141,6 +141,7 @@ from flask_se_practice_admin import (
 )
 from flask_se_practice_yandex_disk import yandex_code
 from config import Config
+
 app = Flask(
     __name__,
     static_url_path="",

@@ -2,8 +2,11 @@ import os
 import pathlib
 from datetime import datetime
 
+
 class Config(object):
-    SECRET_KEY = os.path.join(pathlib.Path(__file__).parent, "configs/flask_se_secret.conf")
+    SECRET_KEY = os.path.join(
+        pathlib.Path(__file__).parent, "configs/flask_se_secret.conf"
+    )
     MAIL_PASSWORD_FILE = os.path.join(
         pathlib.Path(__file__).parent, "configs/flask_se_mail.conf"
     )
@@ -36,4 +39,3 @@ class Config(object):
     # Basic auth config
     BASIC_AUTH_USERNAME = "se_staff"
     BASIC_AUTH_PASSWORD = SECRET_KEY_THESIS
-
