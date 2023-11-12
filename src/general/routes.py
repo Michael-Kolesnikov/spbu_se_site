@@ -2,7 +2,7 @@ from src.general import bp
 from flask import render_template, redirect, url_for
 from src.general.date_formatting import get_hours_since, plural_hours
 import random
-from src.models import Posts, Thesis, Staff
+from src.models import Posts, Thesis, Staff, Worktype, Courses
 from sqlalchemy.sql.expression import func
 
 
@@ -33,11 +33,11 @@ def bachelor_admission():
     staff = ()
     records = Thesis.query.filter_by(recomended=True)
     print(records.count())
-    # if records.count():
-    #     theses = records.order_by(func.random()).limit(4).all()
-    # else:
-    #     theses = []
-    # staff = Staff.query.filter_by(still_working=True).limit(6).all()
+    if records.count():
+        theses = records.order_by(func.random()).limit(4).all()
+    else:
+        theses = []
+    staff = Staff.query.filter_by(still_working=True).limit(6).all()
     return render_template(
         "general/navbar/bachelor_admission.html",
         students=students,
@@ -65,7 +65,7 @@ class ThesisFilter(FlaskForm):
 
 @bp.route("/theses.html")
 def theses_search():
-    # filter = ThesisFilter()
+    filter = ThesisFilter()
     hints = [
         '"Максим" можно искать как Максим, максим, Макс* или *акс*.',
         "Полнотекстовый поиск по названиям работ и авторам",
@@ -74,50 +74,49 @@ def theses_search():
 
     hint = random.choice(hints)
 
-    # for sid in Thesis.query.with_entities(Thesis.type_id).distinct().all():
-    #     type = Worktype.query.filter_by(id=sid[0]).first()
+    for sid in Thesis.query.with_entities(Thesis.type_id).distinct().all():
+        type = Worktype.query.filter_by(id=sid[0]).first()
 
-    #     filter.worktype.choices.append((sid[0], type.type))
-    #     filter.worktype.choices.sort(key=lambda tup: tup[1])
+        filter.worktype.choices.append((sid[0], type.type))
+        filter.worktype.choices.sort(key=lambda tup: tup[1])
 
-    # for sid in Thesis.query.with_entities(Thesis.course_id).distinct().all():
-    #     course = Courses.query.filter_by(id=sid[0]).first()
+    for sid in Thesis.query.with_entities(Thesis.course_id).distinct().all():
+        course = Courses.query.filter_by(id=sid[0]).first()
 
-    #     filter.course.choices.append((sid[0], course.name))
-    #     filter.course.choices.sort(key=lambda tup: tup[1])
+        filter.course.choices.append((sid[0], course.name))
+        filter.course.choices.sort(key=lambda tup: tup[1])
 
-    # dates = [
-    #     theses.publish_year
-    #     for theses in Thesis.query.filter(Thesis.temporary == False)
-    #     .with_entities(Thesis.publish_year)
-    #     .distinct()
-    # ]
-    # dates.sort(reverse=True)
-    # filter.startdate.choices = dates
-    # filter.enddate.choices = dates
+    dates = [
+        theses.publish_year
+        for theses in Thesis.query.filter(Thesis.temporary == False)
+        .with_entities(Thesis.publish_year)
+        .distinct()
+    ]
+    dates.sort(reverse=True)
+    filter.startdate.choices = dates
+    filter.enddate.choices = dates
 
-    # for sid in Thesis.query.with_entities(Thesis.supervisor_id).distinct().all():
-    #     staff = Staff.query.filter_by(id=sid[0]).first()
-    #     last_name = ""
-    #     initials = ""
+    for sid in Thesis.query.with_entities(Thesis.supervisor_id).distinct().all():
+        staff = Staff.query.filter_by(id=sid[0]).first()
+        last_name = ""
+        initials = ""
 
-    #     if not staff:
-    #         staff = Staff.query.filter_by(id=1).first()
+        if not staff:
+            staff = Staff.query.filter_by(id=1).first()
 
-    #     if staff.user.last_name:
-    #         last_name = staff.user.last_name
+        if staff.user.last_name:
+            last_name = staff.user.last_name
 
-    #     if staff.user.first_name:
-    #         initials = initials + staff.user.first_name[0] + "."
+        if staff.user.first_name:
+            initials = initials + staff.user.first_name[0] + "."
 
-    #     if staff.user.middle_name:
-    #         initials = initials + staff.user.middle_name[0] + "."
+        if staff.user.middle_name:
+            initials = initials + staff.user.middle_name[0] + "."
 
-    #     filter.supervisor.choices.append((sid[0], last_name + " " + initials))
-    #     filter.supervisor.choices.sort(key=lambda tup: tup[1])
+        filter.supervisor.choices.append((sid[0], last_name + " " + initials))
+        filter.supervisor.choices.sort(key=lambda tup: tup[1])
 
-    # filter.supervisor.choices.insert(0, (0, "Все"))
-    # filter.course.choices.insert(0, (0, "Все"))
-    # filter.worktype.choices.insert(0, (0, "Все"))
-    filter = ThesisFilter()
+    filter.supervisor.choices.insert(0, (0, "Все"))
+    filter.course.choices.insert(0, (0, "Все"))
+    filter.worktype.choices.insert(0, (0, "Все"))
     return render_template("general/theses.html", filter=filter, hint=hint)
