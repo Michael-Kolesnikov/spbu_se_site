@@ -64,9 +64,6 @@ def secure_filename(filename: str) -> str:
     return filename
 
 
-
-
-
 def get_hours_since(date):
     time_diff = datetime.utcnow() - date
     return int(time_diff.total_seconds() / 3600)

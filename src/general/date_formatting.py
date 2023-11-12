@@ -1,5 +1,6 @@
 from datetime import datetime
 
+
 def get_hours_since(date):
     time_diff = datetime.utcnow() - date
     return int(time_diff.total_seconds() / 3600)

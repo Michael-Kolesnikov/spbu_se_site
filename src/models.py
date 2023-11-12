@@ -62,11 +62,13 @@ tag = db.Table(
     db.Column("thesis_id", db.Integer, db.ForeignKey("thesis.id"), primary_key=True),
 )
 
+
 # https://felx.me/2021/08/29/improving-the-hacker-news-ranking-algorithm.html
 def post_ranking_score(upvotes=1, age=0, views=1):
     u = upvotes**0.8
     a = (age + 2) ** 1.8
     return (u / a) / (views + 1)
+
 
 class SummerSchool(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -78,6 +80,7 @@ class SummerSchool(db.Model):
     demos = db.Column(db.String(1024), nullable=True)
     advisors = db.Column(db.String(1024), nullable=False)
     requirements = db.Column(db.String(1024), nullable=False)
+
 
 class Users(db.Model, UserMixin):
     __searchable__ = ["first_name", "middle_name", "last_name"]
@@ -185,6 +188,7 @@ class Users(db.Model, UserMixin):
 
         return full_name
 
+
 class DiplomaThemes(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
@@ -221,6 +225,7 @@ class DiplomaThemes(db.Model):
     def __str__(self):
         return f"{self.title}"
 
+
 class DiplomaThemesTags(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), nullable=False)
@@ -230,6 +235,7 @@ class DiplomaThemesTags(db.Model):
         lazy="subquery",
         backref=db.backref("diploma_themes_tags", lazy=True),
     )
+
 
 class Staff(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -257,6 +263,7 @@ class Staff(db.Model):
     def __str__(self):
         return self.user.get_name()
 
+
 class Posts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
@@ -281,6 +288,7 @@ class Posts(db.Model):
     type_id = db.Column(db.Integer, db.ForeignKey("post_type.id"))
     type = db.relationship("PostType", back_populates="post")
 
+
 class PostVote(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), primary_key=True)
     user = db.relationship("Users", back_populates="all_user_votes")
@@ -300,6 +308,7 @@ class PostVote(db.Model):
             vote, self.user.get_name(), self.post.title
         )
 
+
 class PostType(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
@@ -310,6 +319,7 @@ class PostType(db.Model):
 
     def __str__(self):
         return self.name
+
 
 class CurrentThesis(db.Model):
     __tablename__ = "current_thesis"
@@ -353,6 +363,7 @@ class CurrentThesis(db.Model):
     def __repr__(self):
         return self.title
 
+
 class Thesis(db.Model):
     __searchable__ = ["name_ru", "description", "author", "text"]
 
@@ -395,6 +406,7 @@ class Thesis(db.Model):
     download_thesis = db.Column(db.Integer, default=0, nullable=True)
     download_presentation = db.Column(db.Integer, default=0, nullable=True)
 
+
 class ThesisReview(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
@@ -421,6 +433,7 @@ class ThesisReview(db.Model):
     overall_comment = db.Column(db.String(1024), nullable=True)
 
     review_file_uri = db.Column(db.String(512), nullable=True)
+
 
 class ThesisOnReview(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -455,6 +468,7 @@ class ThesisOnReview(db.Model):
     # 1 - not active
     deleted = db.Column(db.Integer, nullable=True, default=0)
 
+
 class Reviewer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
@@ -468,6 +482,7 @@ class Reviewer(db.Model):
 
     def __str__(self):
         return self.user.get_name()
+
 
 class Internships(db.Model):
     __tablename__ = "internships"
@@ -509,6 +524,7 @@ class Internships(db.Model):
     def __self__(self):
         return self.name_vacancy
 
+
 class ThemesLevel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
@@ -519,6 +535,7 @@ class ThemesLevel(db.Model):
 
     def __str__(self):
         return f"{self.level}"
+
 
 class Company(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -532,6 +549,7 @@ class Company(db.Model):
 
     def __str__(self):
         return f"{self.name}"
+
 
 class ThesisReport(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -553,6 +571,7 @@ class ThesisReport(db.Model):
         self.current_thesis_id = current_thesis_id
         self.author_id = author_id
 
+
 class ThesisTask(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     task_text = db.Column(db.String(2048), nullable=False)
@@ -566,6 +585,7 @@ class ThesisTask(db.Model):
     def __repr__(self):
         return self.task_text
 
+
 class InternshipCompany(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(512), nullable=False)
@@ -574,6 +594,7 @@ class InternshipCompany(db.Model):
 
     def __str__(self):
         return self.name
+
 
 class InternshipFormat(db.Model):
     __tablename__ = "internship_format"
@@ -584,6 +605,7 @@ class InternshipFormat(db.Model):
     def __str__(self):
         return "{self.format}"
 
+
 class InternshipTag(db.Model):
     __tablename__ = "internship_tag"
 
@@ -592,6 +614,7 @@ class InternshipTag(db.Model):
 
     def __str__(self):
         return self.tag
+
 
 class NotificationPractice(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -607,6 +630,7 @@ class NotificationPractice(db.Model):
     def __repr__(self):
         return self.content
 
+
 class Deadline(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     worktype_id = db.Column(db.Integer, db.ForeignKey("worktype.id"), nullable=False)
@@ -618,6 +642,7 @@ class Deadline(db.Model):
 
     pre_defense = db.Column(db.DateTime, nullable=True)
     defense = db.Column(db.DateTime, nullable=True)
+
 
 class Worktype(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -635,6 +660,7 @@ class Worktype(db.Model):
     def __repr__(self):
         return self.type
 
+
 class ThesisOnReviewWorktype(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     type = db.Column(db.String(255), nullable=False)
@@ -645,6 +671,7 @@ class ThesisOnReviewWorktype(db.Model):
 
     def __repr__(self):
         return self.type
+
 
 class Courses(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -658,6 +685,7 @@ class Courses(db.Model):
 
     def __repr__(self):
         return "<%r>" % (self.name)
+
 
 class AreasOfStudy(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -674,12 +702,14 @@ class AreasOfStudy(db.Model):
     def __repr__(self):
         return self.area
 
+
 class Tags(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), nullable=False)
     tags = db.relationship(
         "Thesis", secondary=tag, lazy="subquery", backref=db.backref("tags", lazy=True)
     )
+
 
 class Curriculum(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -691,9 +721,11 @@ class Curriculum(db.Model):
 
     course_id = db.Column(db.Integer, db.ForeignKey("courses.id"), nullable=False)
 
+
 class PromoCode(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     code = db.Column(db.String(512), nullable=False)
+
 
 class Notification(db.Model):
     id = db.Column(db.Integer, primary_key=True)

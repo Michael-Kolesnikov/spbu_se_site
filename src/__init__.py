@@ -5,6 +5,7 @@ from pathlib import Path
 import shutil
 from flask_migrate import Migrate
 
+
 def create_app(config_name):
     app = Flask(
         __name__,
@@ -22,12 +23,16 @@ def create_app(config_name):
         db.create_all()
 
     from flask_simplemde import SimpleMDE
+    
     SimpleMDE(app)
     from src.general import bp as general_bp
+    
     app.register_blueprint(general_bp)
     from src.summer_schools import bp as school_bp
+    
     app.register_blueprint(school_bp)
     from src.scholarships import bp as scholarship_bp
+    
     app.register_blueprint(scholarship_bp)
 
     return app

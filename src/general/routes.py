@@ -5,6 +5,7 @@ import random
 from src.models import Posts, Thesis, Staff
 from sqlalchemy.sql.expression import func
 
+
 @bp.route("/")
 def index():
     ages = []
@@ -24,6 +25,7 @@ def index():
 def index_html():
     return redirect(url_for("index"))
 
+
 @bp.route("/bachelor/admission.html")
 def bachelor_admission():
     students = []
@@ -37,17 +39,21 @@ def bachelor_admission():
     #     theses = []
     # staff = Staff.query.filter_by(still_working=True).limit(6).all()
     return render_template(
-        "general/navbar/bachelor_admission.html", students=students, theses=theses, staff=staff
+        "general/navbar/bachelor_admission.html",
+        students=students,
+        theses=theses,
+        staff=staff,
     )
+
 
 @bp.route("/frequently-asked-questions.html")
 def frequently_asked_questions():
     return render_template("general/navbar/frequently_asked_questions.html")
 
 
-
 from flask_wtf import FlaskForm
 from wtforms import SelectField
+
 
 class ThesisFilter(FlaskForm):
     worktype = SelectField("worktype", choices=[])
