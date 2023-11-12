@@ -64,6 +64,13 @@ def secure_filename(filename: str) -> str:
     return filename
 
 
+# https://felx.me/2021/08/29/improving-the-hacker-news-ranking-algorithm.html
+def post_ranking_score(upvotes=1, age=0, views=1):
+    u = upvotes**0.8
+    a = (age + 2) ** 1.8
+    return (u / a) / (views + 1)
+
+
 def get_hours_since(date):
     time_diff = datetime.utcnow() - date
     return int(time_diff.total_seconds() / 3600)

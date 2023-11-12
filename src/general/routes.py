@@ -61,6 +61,8 @@ class ThesisFilter(FlaskForm):
     supervisor = SelectField("supervisor", choices=[])
     startdate = SelectField("worktype", choices=[])
     enddate = SelectField("worktype", choices=[])
+
+
 @bp.route("/theses.html")
 def theses_search():
     # filter = ThesisFilter()
