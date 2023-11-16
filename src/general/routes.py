@@ -2,7 +2,7 @@ from src.general import bp
 from flask import render_template, redirect, url_for
 from src.general.date_formatting import get_hours_since, plural_hours
 import random
-from src.models import Posts, Thesis, Staff, Worktype, Courses
+from src.models import Curriculum, Posts, Thesis, Staff, Worktype, Courses
 from sqlalchemy.sql.expression import func
 
 
@@ -49,6 +49,134 @@ def bachelor_admission():
 @bp.route("/frequently-asked-questions.html")
 def frequently_asked_questions():
     return render_template("general/navbar/frequently_asked_questions.html")
+
+
+@bp.route("/nooffer")
+def nooffer():
+    return render_template("nooffer.html")
+
+
+@bp.route("/department/staff.html")
+def department_staff():
+    records = Staff.query.filter_by(still_working=True).all()
+    staff = []
+
+    # TODO: no need loop
+    for s in records:
+        position = s.position
+        if s.science_degree:
+            position = position + ", " + s.science_degree
+
+        staff.append(
+            {
+                "name": s.user.get_name(),
+                "position": position,
+                "contacts": s.official_email,
+                "avatar": s.user.avatar_uri,
+                "id": s.id,
+            }
+        )
+
+    return render_template("department_staff.html", staff=staff)
+
+
+@bp.route("/master/information-systems-administration.html")
+def master_information_systems_administration():
+    return render_template("master_information-systems-administration.html")
+
+
+@bp.route("/master/software-engineering.html")
+def master_software_engineering():
+    return render_template("master_software-engineering.html")
+
+
+
+@bp.route("/bachelor/software-engineering.html")
+def bachelor_software_engineering():
+    curricula1 = (
+        Curriculum.query.filter(Curriculum.course_id == 2)
+        .filter(Curriculum.study_year == 1)
+        .order_by(Curriculum.type)
+        .all()
+    )
+    curricula2 = (
+        Curriculum.query.filter(Curriculum.course_id == 2)
+        .filter(Curriculum.study_year == 2)
+        .order_by(Curriculum.type)
+        .all()
+    )
+    curricula3 = (
+        Curriculum.query.filter(Curriculum.course_id == 2)
+        .filter(Curriculum.study_year == 3)
+        .order_by(Curriculum.type)
+        .all()
+    )
+    curricula4 = (
+        Curriculum.query.filter(Curriculum.course_id == 2)
+        .filter(Curriculum.study_year == 4)
+        .order_by(Curriculum.type)
+        .all()
+    )
+
+    return render_template(
+        "bachelor_software-engineering.html",
+        curricula1=curricula1,
+        curricula2=curricula2,
+        curricula3=curricula3,
+        curricula4=curricula4,
+    )
+
+
+
+@bp.route("/contacts.html")
+def contacts():
+    return render_template("contacts.html")
+
+
+@bp.route("/students/index.html")
+def students():
+    return render_template("students.html")
+
+
+@bp.route("/bachelor/application.html")
+def bachelor_application():
+    return render_template("bachelor_application.html")
+
+
+@bp.route("/bachelor/programming-technology.html")
+def bachelor_programming_technology():
+    curricula1 = (
+        Curriculum.query.filter(Curriculum.course_id == 1)
+        .filter(Curriculum.study_year == 1)
+        .order_by(Curriculum.type)
+        .all()
+    )
+    curricula2 = (
+        Curriculum.query.filter(Curriculum.course_id == 1)
+        .filter(Curriculum.study_year == 2)
+        .order_by(Curriculum.type)
+        .all()
+    )
+    curricula3 = (
+        Curriculum.query.filter(Curriculum.course_id == 1)
+        .filter(Curriculum.study_year == 3)
+        .order_by(Curriculum.type)
+        .all()
+    )
+    curricula4 = (
+        Curriculum.query.filter(Curriculum.course_id == 1)
+        .filter(Curriculum.study_year == 4)
+        .order_by(Curriculum.type)
+        .all()
+    )
+
+    return render_template(
+        "bachelor_programming-technology.html",
+        curricula1=curricula1,
+        curricula2=curricula2,
+        curricula3=curricula3,
+        curricula4=curricula4,
+    )
 
 
 from flask_wtf import FlaskForm
