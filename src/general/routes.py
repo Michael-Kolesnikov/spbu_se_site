@@ -90,7 +90,6 @@ def master_software_engineering():
     return render_template("master_software-engineering.html")
 
 
-
 @bp.route("/bachelor/software-engineering.html")
 def bachelor_software_engineering():
     curricula1 = (
@@ -125,7 +124,6 @@ def bachelor_software_engineering():
         curricula3=curricula3,
         curricula4=curricula4,
     )
-
 
 
 @bp.route("/contacts.html")
