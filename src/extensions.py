@@ -31,7 +31,7 @@ from src.models import (
     Thesis,
     Users,
     Staff,
-    Worktype
+    Worktype,
 )
 from src.data import (
     wtypes,
@@ -44,8 +44,9 @@ from src.data import (
     d_themes,
     themes_level,
     internship_formats,
-    internship_tags
+    internship_tags,
 )
+
 
 def init_db():
     # Check if databases directory exists. If not, create it

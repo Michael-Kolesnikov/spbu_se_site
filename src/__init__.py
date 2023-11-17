@@ -22,7 +22,6 @@ def create_app(config_name):
     db.app = app
     db.init_app(app)
     migrate = Migrate(app, db, render_as_batch=True)
-                
     SimpleMDE(app)
     app.register_blueprint(general_bp)
     app.register_blueprint(school_bp)
