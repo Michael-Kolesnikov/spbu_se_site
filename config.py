@@ -19,7 +19,7 @@ class Config(object):
     MAIL_PASSWORD = os.urandom(16).hex()
     SECRET_KEY_THESIS = os.urandom(16).hex()
     SQLITE_DATABASE_NAME = "se.db"
-    SQLITE_DATABASE_PATH = pathlib.Path("databases/").absolute().as_posix()
+    SQLITE_DATABASE_PATH = pathlib.Path("src/databases").absolute().as_posix()
     # Flask configs
     APPLICATION_ROOT = "/"
     # Freezer config
@@ -28,7 +28,7 @@ class Config(object):
     FREEZER_IGNORE_MIMETYPE_WARNINGS = True
     # SQLAlchimy config
     SQLALCHEMY_TRACK_MODIFICATIONS = True
-    SQLALCHEMY_DATABASE_URI = "sqlite:///" + SQLITE_DATABASE_NAME
+    SQLALCHEMY_DATABASE_URI = "sqlite:///" + SQLITE_DATABASE_PATH + "/" + SQLITE_DATABASE_NAME
     SECRET_KEY = SECRET_KEY
     SESSION_COOKIE_NAME = "se_session"
     # Secret for API

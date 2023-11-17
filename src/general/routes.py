@@ -53,7 +53,7 @@ def frequently_asked_questions():
 
 @bp.route("/nooffer")
 def nooffer():
-    return render_template("nooffer.html")
+    return render_template("general/nooffer.html")
 
 
 @bp.route("/department/staff.html")
@@ -77,17 +77,17 @@ def department_staff():
             }
         )
 
-    return render_template("department_staff.html", staff=staff)
+    return render_template("general/department_staff.html", staff=staff)
 
 
 @bp.route("/master/information-systems-administration.html")
 def master_information_systems_administration():
-    return render_template("master_information-systems-administration.html")
+    return render_template("general/master_information-systems-administration.html")
 
 
 @bp.route("/master/software-engineering.html")
 def master_software_engineering():
-    return render_template("master_software-engineering.html")
+    return render_template("general/master_software-engineering.html")
 
 
 @bp.route("/bachelor/software-engineering.html")
@@ -118,7 +118,7 @@ def bachelor_software_engineering():
     )
 
     return render_template(
-        "bachelor_software-engineering.html",
+        "general/bachelor_software-engineering.html",
         curricula1=curricula1,
         curricula2=curricula2,
         curricula3=curricula3,
@@ -128,17 +128,17 @@ def bachelor_software_engineering():
 
 @bp.route("/contacts.html")
 def contacts():
-    return render_template("contacts.html")
+    return render_template("general/contacts.html")
 
 
 @bp.route("/students/index.html")
 def students():
-    return render_template("students.html")
+    return render_template("general/students.html")
 
 
 @bp.route("/bachelor/application.html")
 def bachelor_application():
-    return render_template("bachelor_application.html")
+    return render_template("general/bachelor_application.html")
 
 
 @bp.route("/bachelor/programming-technology.html")
@@ -169,7 +169,7 @@ def bachelor_programming_technology():
     )
 
     return render_template(
-        "bachelor_programming-technology.html",
+        "general/bachelor_programming-technology.html",
         curricula1=curricula1,
         curricula2=curricula2,
         curricula3=curricula3,
