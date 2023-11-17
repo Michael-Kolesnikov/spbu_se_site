@@ -17,14 +17,40 @@ convention = {
 metadata = MetaData(naming_convention=convention)
 db = SQLAlchemy(metadata=metadata)
 
-from src.models import AreasOfStudy, Company, Courses, Curriculum, DiplomaThemes, InternshipFormat, InternshipTag, Posts, Tags, ThemesLevel, Thesis, Users, Staff, Worktype
-from src.data import wtypes, curriculum, posts, courses, tags, thesis, company, d_themes, themes_level, internship_formats, internship_tags
+from src.models import (
+    AreasOfStudy,
+    Company,
+    Courses,
+    Curriculum,
+    DiplomaThemes,
+    InternshipFormat,
+    InternshipTag,
+    Posts,
+    Tags,
+    ThemesLevel,
+    Thesis,
+    Users,
+    Staff,
+    Worktype
+)
+from src.data import (
+    wtypes,
+    curriculum,
+    posts,
+    courses,
+    tags,
+    thesis,
+    company,
+    d_themes,
+    themes_level,
+    internship_formats,
+    internship_tags
+)
 
 def init_db():
     # Check if databases directory exists. If not, create it
     db_dir = Path(current_app.config["SQLITE_DATABASE_PATH"])
     if not db_dir.exists():
-        print(db_dir,"---------------")
         db_dir.mkdir()
     # Check if db file already exists. If so, backup it
     db_file = Path(
@@ -38,12 +64,11 @@ def init_db():
             current_app.config["SQLITE_DATABASE_PATH"]
             + current_app.config["SQLITE_DATABASE_BACKUP_NAME"],
         )
-    
     # Init DB
     db.session.commit()  # https://stackoverflow.com/questions/24289808/drop-all-freezes-in-flask-with-sqlalchemy
     db.drop_all()
     db.create_all()
-    
+
     # Create areas
     print("Create areas")
     for area in areas:
@@ -51,7 +76,7 @@ def init_db():
 
         db.session.add(a)
         db.session.commit()
-    
+
     # Create users
     print("Create users")
     for user in users:
