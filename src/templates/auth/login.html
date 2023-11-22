@@ -41,7 +41,7 @@
                         <h6 class="h3 mb-1">Вход</h6>
                     </div>
                     <span class="clearfix"></span>
-                    <form method="post" action="{{url_for('login_index')}}">
+                    <form method="post" action="{{url_for('auth.login_index')}}">
                         <div class="form-group">
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -88,7 +88,7 @@
                             </a>
                         </div>
                         <div class="col-sm-6">
-                            <a href="{{ url_for('google_login') }}" class="btn btn-block btn-neutral btn-icon px-2">
+                            <a href="{{ url_for('auth.google_login') }}" class="btn btn-block btn-neutral btn-icon px-2">
                                 <span class="btn-inner--icon"><img src="/assets/img/login/google.svg"
                                                                    alt="Image placeholder"></span>
                                 <span class="btn-inner--text">Google</span>
@@ -97,7 +97,7 @@
                     </div>
                     <!-- Links -->
                     <div class="mt-4 text-center"><small>Не зарегистрированы?</small>
-                        <a href="{{ url_for('register_basic') }}" class="small font-weight-bold">Зарегистрироваться</a>
+                        <a href="{{ url_for('auth.register_basic') }}" class="small font-weight-bold">Зарегистрироваться</a>
                     </div>
                 </div>
             </div>
@@ -108,7 +108,7 @@
 <script>
 function pass_rec_page_switch()
 {
-     location.href = "{{ url_for('login_index') }}";
+     location.href = "{{ url_for('auth.login_index') }}";
 }
 
 </script>

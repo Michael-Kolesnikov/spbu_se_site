@@ -41,7 +41,7 @@
                         <h6 class="h3 mb-1">Создать аккаунт</h6>
                     </div>
                     <span class="clearfix"></span>
-                    <form method="post" action="{{ url_for('register_basic') }}">
+                    <form method="post" action="{{ url_for('auth.register_basic') }}">
                         <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -84,7 +84,7 @@
                             </a>
                         </div>
                         <div class="col-sm-6">
-                            <a href="{{ url_for('login_index') }}" class="btn btn-block btn-neutral btn-icon px-2">
+                            <a href="{{ url_for('auth.login_index') }}" class="btn btn-block btn-neutral btn-icon px-2">
                                 <span class="btn-inner--icon"><img src="/assets/img/login/google.svg"
                                                                    alt="Image placeholder"></span>
                                 <span class="btn-inner--text">Google</span>
@@ -93,7 +93,7 @@
                     </div>
                     <!-- Links -->
                     <div class="mt-4 text-center"><small>Уже зарегистрированы?</small>
-                        <a href="{{ url_for('login_index') }}" class="small font-weight-bold">Войти</a>
+                        <a href="{{ url_for('auth.login_index') }}" class="small font-weight-bold">Войти</a>
                     </div>
                 </div>
 

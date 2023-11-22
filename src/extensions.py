@@ -1,4 +1,5 @@
 import shutil
+from flask_login import LoginManager
 from sqlalchemy import MetaData
 from flask_sqlalchemy import SQLAlchemy
 from pathlib import Path
@@ -47,6 +48,9 @@ from src.data import (
     internship_tags,
 )
 
+
+login_manager = LoginManager()
+login_manager.login_view = "login_index"
 
 def init_db():
     # Check if databases directory exists. If not, create it
