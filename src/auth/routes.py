@@ -31,6 +31,7 @@ os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 # create an alias of login_required decorator
 login_required = login_required
 
+
 @bp.route("/login.html", methods=["GET", "POST"])
 def login_index():
     if current_user.is_authenticated:

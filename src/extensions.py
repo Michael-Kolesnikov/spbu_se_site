@@ -52,6 +52,7 @@ from src.data import (
 login_manager = LoginManager()
 login_manager.login_view = "login_index"
 
+
 def init_db():
     # Check if databases directory exists. If not, create it
     db_dir = Path(current_app.config["SQLITE_DATABASE_PATH"])
