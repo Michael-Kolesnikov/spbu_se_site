@@ -29,7 +29,7 @@
             </div>
         </div>
 
-        <form method="POST" action="{{url_for('edit_user_theme', theme_id=form.theme_id)}}">
+        <form method="POST" action="{{url_for('diplomas.edit_user_theme', theme_id=form.theme_id)}}">
             {{ form.csrf_token }}
             <div class="row row-grid">
                 <div class="col-lg-9">
@@ -79,7 +79,7 @@
                     {% if user.how_to_contact %}
                     <p class="text-sm">{{ user.how_to_contact }} </p>
                     {% else %}
-                    <p class="text-sm text-danger">Заполнте поле "Как с вами связаться" в <a href="{{url_for('user_profile')}}">вашем профиле.</a></p>
+                    <p class="text-sm text-danger">Заполнте поле "Как с вами связаться" в <a href="{{url_for('diplomas.user_profile')}}">вашем профиле.</a></p>
                     {% endif %}
 
                      <hr class="my-3" />

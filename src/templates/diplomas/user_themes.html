@@ -14,12 +14,12 @@
             </div>
             <div class="row mt-4 d-flex justify-content-center">
                 <div class="col-md-3 pb-sm-2">
-                    <a href="{{ url_for('diplomas_index') }}" class="btn btn-lg btn-secondary btn-icon w-100">
+                    <a href="{{ url_for('diplomas.diplomas_index') }}" class="btn btn-lg btn-secondary btn-icon w-100">
                         <span class="btn-inner--text">Все темы</span>
                     </a>
                 </div>
                 <div class="col-md-3">
-                    <a href="{{ url_for('add_user_theme') }}" class="btn btn-lg btn-primary btn-icon w-100">
+                    <a href="{{ url_for('diplomas.add_user_theme') }}" class="btn btn-lg btn-primary btn-icon w-100">
                         <span class="btn-inner--text">Предложить тему</span>
                     </a>
                 </div>
@@ -36,7 +36,7 @@
                         <div class="card-header">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h6 class="mb-0"><a href="{{ url_for('get_theme', id=t.id) }}" class="link text-primary"><strong>{{t.title}}</strong></a></h6>
+                                    <h6 class="mb-0"><a href="{{ url_for('diplomas.get_theme', id=t.id) }}" class="link text-primary"><strong>{{t.title}}</strong></a></h6>
                                 </div>
                                 <div class="col-auto ml-auto text-right">
                                     {% if t.company.id == 1 %}
@@ -63,7 +63,7 @@
                                     <p class="pt-2">Тема отправлена преподавателям и будет рассмотрена коллективом кафедры.</p>
 
                                     {% elif t.status == 1 %}
-                                    <a href="{{ url_for('edit_user_theme', theme_id=t.id) }}" class="btn btn-xs btn-danger btn-icon">
+                                    <a href="{{ url_for('diplomas.edit_user_theme', theme_id=t.id) }}" class="btn btn-xs btn-danger btn-icon">
                                         <span class="btn-inner--icon"><i data-feather="edit-2"></i></span>
                                         <span class="btn-inner--text">Требуется доработка</span>
                                     </a>
@@ -78,7 +78,7 @@
                                     <p class="pt-2">Ваша тема в архиве. Чтобы отправить ее на проверку, внесите любые изменения и сохраните их.</p>
 
                                     {% elif t.status == 4 %}
-                                    <a href="{{ url_for('edit_user_theme', theme_id=t.id) }}" class="btn btn-xs btn-danger btn-icon" data-toggle="tooltip" data-placement="right" data-title="Вы можете отредактировать тему и заново отправить на проверку.">
+                                    <a href="{{ url_for('diplomas.edit_user_theme', theme_id=t.id) }}" class="btn btn-xs btn-danger btn-icon" data-toggle="tooltip" data-placement="right" data-title="Вы можете отредактировать тему и заново отправить на проверку.">
                                         <span class="btn-inner--icon"><i data-feather="edit-2"></i></span>
                                         <span class="btn-inner--text">Отклонена</span>
                                     </a>

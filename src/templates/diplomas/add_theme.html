@@ -11,7 +11,7 @@
 <section class="mt-7 pt-6 bg-section-secondary">
     <div class="container">
 
-        <form method="POST" action="{{url_for('add_user_theme')}}">
+        <form method="POST" action="{{url_for('diplomas.add_user_theme')}}">
             {{ form.csrf_token }}
             <div class="row row-grid">
                 <div class="col-lg-9">
@@ -61,7 +61,7 @@
                     {% if user.how_to_contact %}
                     <p class="text-sm">{{ user.how_to_contact }} </p>
                     {% else %}
-                    <p class="text-sm text-danger">Заполните поле "Как с вами связаться" в <a href="{{url_for('user_profile')}}">вашем профиле.</a></p>
+                    <p class="text-sm text-danger">Заполните поле "Как с вами связаться" в <a href="{{url_for('auth.user_profile')}}">вашем профиле.</a></p>
                     {% endif %}
 
                      <hr class="my-3" />

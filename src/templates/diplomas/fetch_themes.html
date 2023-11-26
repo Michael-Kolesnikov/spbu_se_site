@@ -3,7 +3,7 @@
                         <div class="card-header">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h6 class="mb-0"><a href="{{ url_for('get_theme', id=t.id) }}" class="link text-primary"><strong>{{t.title}}</strong></a></h6>
+                                    <h6 class="mb-0"><a href="{{ url_for('diplomas.get_theme', id=t.id) }}" class="link text-primary"><strong>{{t.title}}</strong></a></h6>
                                 </div>
                                 <div class="col-auto ml-auto text-right">
                                     {% if t.company.id == 1 %}
@@ -30,14 +30,14 @@
   <ul class="pagination justify-content-center">
       {% if themes.has_prev %}
     <li class="page-item">
-      <a class="page-link" href="{{ url_for ('diplomas_index', page=themes.prev_num, format=format) }}" tabindex="-1" aria-disabled="true">Назад</a>
+      <a class="page-link" href="{{ url_for ('diplomas.diplomas_index', page=themes.prev_num, format=format) }}" tabindex="-1" aria-disabled="true">Назад</a>
     </li>
       {% endif %}
 
       {% for curr_page in themes.iter_pages() %}
       {% if curr_page %}
         {% if curr_page != themes.page %}
-            <li class="page-item"><a class="page-link" href="{{ url_for ('diplomas_index', page=curr_page, supervisor=supervisor, company=company, level=level) }}">{{curr_page}}</a></li>
+            <li class="page-item"><a class="page-link" href="{{ url_for ('diplomas.diplomas_index', page=curr_page, supervisor=supervisor, company=company, level=level) }}">{{curr_page}}</a></li>
         {% else %}
         <li class="page-item active"><span class="page-link">{{curr_page}}<span class="sr-only">(current)</span></span></li>
         {% endif %}
@@ -48,7 +48,7 @@
 
       {% if themes.has_next %}
     <li class="page-item">
-      <a class="page-link" href="{{ url_for ('diplomas_index', page=themes.next_num, supervisor=supervisor, company=company, level=level) }}">Вперед</a>
+      <a class="page-link" href="{{ url_for ('diplomas.diplomas_index', page=themes.next_num, supervisor=supervisor, company=company, level=level) }}">Вперед</a>
     </li>
       {% endif %}
   </ul>

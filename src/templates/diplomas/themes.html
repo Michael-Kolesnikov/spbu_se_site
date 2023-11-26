@@ -19,13 +19,13 @@
             <div class="row mt-4 d-flex justify-content-center">
                 {% if user_themes_count %}
                 <div class="col-md-3 pb-sm-2">
-                    <a href="{{ url_for('user_diplomas_index') }}" class="btn btn-lg btn-secondary btn-icon w-100">
+                    <a href="{{ url_for('diplomas.user_diplomas_index') }}" class="btn btn-lg btn-secondary btn-icon w-100">
                         <span class="btn-inner--text">Мои темы ({{user_themes_count}})</span>
                     </a>
                 </div>
                 {% endif %}
                 <div class="col-md-3">
-                    <a href="{{ url_for('add_user_theme') }}" class="btn btn-lg btn-primary btn-icon w-100">
+                    <a href="{{ url_for('diplomas.add_user_theme') }}" class="btn btn-lg btn-primary btn-icon w-100">
                         <span class="btn-inner--text">Предложить тему</span>
                     </a>
                 </div>
@@ -43,7 +43,7 @@
                         <div class="card-header">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h6 class="mb-0"><a href="{{ url_for('get_theme', id=t.id) }}" class="link text-primary"><strong>{{t.title}}</strong></a></h6>
+                                    <h6 class="mb-0"><a href="{{ url_for('diplomas.get_theme', id=t.id) }}" class="link text-primary"><strong>{{t.title}}</strong></a></h6>
                                 </div>
                                 <div class="col-auto ml-auto text-right">
                                     {% if t.company.id == 1 %}
