@@ -11,4 +11,4 @@ def load_user(user_id):
 @login_manager.unauthorized_handler
 def handle_needs_login():
     flash("Для выполнения этого действия необходимо войти.")
-    return redirect(url_for("login_index", next=request.endpoint))
+    return redirect(url_for("auth.login_index", next=request.endpoint))

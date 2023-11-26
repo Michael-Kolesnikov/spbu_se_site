@@ -1,6 +1,6 @@
 from src.general import bp
 from flask import render_template, redirect, url_for
-from src.general.date_formatting import get_hours_since, plural_hours
+from src.date_formatting import get_hours_since, plural_hours
 import random
 from src.models import Curriculum, Posts, Thesis, Staff, Worktype, Courses
 from sqlalchemy.sql.expression import func

@@ -63,7 +63,7 @@
                             <div class="list-group-item d-flex w-100 justify-content-between px-1 py-1">
                                 <div class="col-10 my-auto">
                                     {% if n.uri %}
-                                    <h6 class="font-weight-light mb-0"><a href="{{ url_for ('get_post', post=n.id)}}" target="_blank">{{n.title}}</a>&nbsp;({{n.domain}})</h6>
+                                    <h6 class="font-weight-light mb-0"><a href="{{ url_for ('news.get_post', post=n.id)}}" target="_blank">{{n.title}}</a>&nbsp;({{n.domain}})</h6>
                                         {% if n.type.type == 1 %}
                                             <span class="badge badge-success">{{n.type}}</span>
                                         {% elif n.type.type == 2 %}
@@ -75,7 +75,7 @@
                                         {% endif %}
                                     <span class="text-sm text-muted">опубликовано {{ ages[loop.index-1] }} назад</span>
                                     {% else %}
-                                    <h6 class="font-weight-light mb-0"><a href="{{ url_for ('get_post', post=n.id)}}" target="_blank">{{n.title}}</a></h6>
+                                    <h6 class="font-weight-light mb-0"><a href="{{ url_for ('news.get_post', post=n.id)}}" target="_blank">{{n.title}}</a></h6>
                                         {% if n.type.type == 1 %}
                                             <span class="badge badge-success">{{n.type}}</span>
                                         {% elif n.type.type == 2 %}
@@ -97,8 +97,7 @@
             </div>
         <div class="row pt-2 d-flex justify-content-center">
                 <div class="col-lg-3 col-md-4">
-                    <!--  url_for('list_news')  -->
-                    <a href="#" class="btn btn-lg btn-secondary btn-icon mb-3 mb-lg-0 w-100">
+                    <a href="{{ url_for('news.list_news') }}" class="btn btn-lg btn-secondary btn-icon mb-3 mb-lg-0 w-100">
                         <span class="btn-inner--text">Все новости</span>
                     </a>
                 </div>
