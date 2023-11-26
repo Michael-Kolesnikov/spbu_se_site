@@ -24,6 +24,8 @@ def list_news():
 
 bp.add_url_rule("/news/", view_func=list_news)
 bp.add_url_rule("/news/index.html", view_func=list_news)
+
+
 @bp.route("/news/item.html")
 def get_post():
     post_id = request.args.get("post", type=int)

@@ -13,6 +13,7 @@ from src.errors import bp as errors_bp
 from src.auth import bp as auth_bp
 from src.news import bp as news_bp
 
+
 def create_app(config_name):
     app = Flask(
         __name__,
