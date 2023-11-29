@@ -454,7 +454,7 @@ def review_submit_review():
         )
         return redirect(
             url_for("theses.review_thesis_on_review", thesis_review_id=thesis_id)
-            )
+        )
 
     data = ""
     review = ThesisReview(
