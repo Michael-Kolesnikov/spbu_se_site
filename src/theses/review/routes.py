@@ -3,7 +3,12 @@ from datetime import date
 from pathlib import Path
 from src.theses import bp
 from flask_login import current_user, login_required
-from src.theses.review.forms import AddThesisOnReview, ThesisReviewFilter, EditThesisOnReview, ReviewForm
+from src.theses.review.forms import (
+    AddThesisOnReview,
+    ThesisReviewFilter,
+    EditThesisOnReview,
+    ReviewForm,
+)
 from src.models import (
     PromoCode,
     ThesisOnReviewWorktype,
@@ -447,7 +452,9 @@ def review_submit_review():
             "В рецензии есть пропущенные вопросы. Нужно ответить на все вопросы, поля с комментариями являются опциональными.",
             "error",
         )
-        return redirect(url_for("theses.review_thesis_on_review", thesis_review_id=thesis_id))
+        return redirect(
+            url_for("theses.review_thesis_on_review", thesis_review_id=thesis_id)
+            )
 
     data = ""
     review = ThesisReview(

@@ -16,6 +16,7 @@ from src.news import bp as news_bp
 from src.diplomas import bp as diplomas_bp
 from src.theses import bp as theses_bp
 
+
 def create_app(config_name):
     app = Flask(
         __name__,
