@@ -14,7 +14,7 @@ from src.errors import bp as errors_bp
 from src.auth import bp as auth_bp
 from src.news import bp as news_bp
 from src.diplomas import bp as diplomas_bp
-
+from src.theses import bp as theses_bp
 
 def create_app(config_name):
     app = Flask(
@@ -39,4 +39,5 @@ def create_app(config_name):
     app.register_blueprint(auth_bp)
     app.register_blueprint(news_bp)
     app.register_blueprint(diplomas_bp)
+    app.register_blueprint(theses_bp)
     return app

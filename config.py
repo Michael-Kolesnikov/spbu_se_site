@@ -44,6 +44,19 @@ class Config(object):
     # SimpleMDE
     SIMPLEMDE_JS_IIFE = True
     SIMPLEMDE_USE_CDN = False
+    type_id_string = [
+    "",
+    "Bachelor_Report",
+    "Bachelor_Thesis",
+    "Master_Thesis",
+    "Autumn_practice_2nd_year",
+    "Spring_practice_2nd_year",
+    "Autumn_practice_3rd_year",
+    "Spring_practice_3rd_year",
+    "Production_practice",
+    "Pre_graduate_practice",
+    ]
+
 
 config = {
     'default': Config

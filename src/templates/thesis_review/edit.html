@@ -31,7 +31,7 @@
                         <h3 class="mb-3">Редактирование</h3>
                         <!-- Form -->
 
-                        <form method="POST" action="{{url_for('edit_thesis_on_review', thesis_review_id=thesis.id) }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{url_for('theses.edit_thesis_on_review', thesis_review_id=thesis.id) }}" enctype="multipart/form-data">
                             <!-- General information -->
                             {{ form.csrf_token }}
                             <div class="row">
