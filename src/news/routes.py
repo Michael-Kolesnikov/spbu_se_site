@@ -88,7 +88,7 @@ def post_vote():
     action_vote = request.args.get("action_vote", type=int)
 
     if not post_id:
-        return render_template(url_for("index"))
+        return render_template(url_for("general.index"))
 
     post = Posts.query.filter_by(id=post_id).first_or_404()
 
@@ -139,14 +139,14 @@ def delete_post():
     post_id = request.args.get("post_id", type=int)
 
     if not post_id:
-        return redirect(url_for("list_news"))
+        return redirect(url_for("news.list_news"))
 
     post = Posts.query.filter_by(id=post_id).first_or_404()
 
     if post.author.id != current_user.id:
-        return redirect(url_for("get_post", post=post_id))
+        return redirect(url_for("news.get_post", post=post_id))
 
     db.session.delete(post)
     db.session.commit()
 
-    return redirect(url_for("list_news"))
+    return redirect(url_for("news.list_news"))

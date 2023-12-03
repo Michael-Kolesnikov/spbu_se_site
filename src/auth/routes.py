@@ -35,7 +35,7 @@ login_required = login_required
 @bp.route("/login.html", methods=["GET", "POST"])
 def login_index():
     if current_user.is_authenticated:
-        return redirect(url_for("user_profile"))
+        return redirect(url_for("auth.user_profile"))
 
     next_url = request.args.get("next")
 
@@ -53,7 +53,7 @@ def login_index():
                 user.password_hash, password
             ):
                 login_user(user, remember=True)
-                return redirect_next_url(fallback=url_for("user_profile"))
+                return redirect_next_url(fallback=url_for("auth.user_profile"))
             else:
                 flash("Пара логин и пароль указаны неверно", category="error")
                 return render_template("auth/login.html", user=current_user)
@@ -89,7 +89,7 @@ def register_basic():
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)
-            return redirect(url_for("user_profile"))
+            return redirect(url_for("auth.user_profile"))
 
     return render_template("auth/register_basic.html", user=current_user)
 
@@ -171,7 +171,7 @@ def upload_avatar():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for("index"))
+    return redirect(url_for("general.index"))
 
 
 @bp.route("/vk_callback", methods=["GET"])
@@ -180,7 +180,7 @@ def vk_callback():
     user_code = request.args.get("code")
 
     if not user_code:
-        return redirect(url_for("index"))
+        return redirect(url_for("general.index"))
 
     # Get access token
     response = requests.get(
@@ -190,7 +190,7 @@ def vk_callback():
     access_token_json = json.loads(response.text)
 
     if "error" in access_token_json:
-        return redirect(url_for("index"))
+        return redirect(url_for("general.index"))
 
     print(access_token_json)
 
@@ -238,12 +238,12 @@ def vk_callback():
             print(error)
             print("Can't add new user to the Database")
             flash(error, category="error")
-            return redirect(url_for("login_index"))
+            return redirect(url_for("auth.login_index"))
 
         user = Users.query.filter_by(vk_id=vk_id).first()
 
     login_user(user, remember=True)
-    return redirect_next_url(fallback=url_for("user_profile"))
+    return redirect_next_url(fallback=url_for("auth.user_profile"))
 
 
 @bp.route("/google_login", methods=["GET"])
@@ -257,7 +257,7 @@ def google_login():
         ],
     )
 
-    flow.redirect_uri = url_for("google_callback", _external=True)
+    flow.redirect_uri = url_for("auth.google_callback", _external=True)
     authorization_url, state = flow.authorization_url(
         access_type="offline", include_granted_scopes="true"
     )
@@ -271,7 +271,7 @@ def google_callback():
     print(request.args.get("state"), session)
 
     if not state:
-        redirect(url_for("login_index"))
+        redirect(url_for("auth.login_index"))
 
     flow = Flow.from_client_secrets_file(
         client_secrets_file=client_secrets_file,
@@ -282,7 +282,7 @@ def google_callback():
         ],
     )
 
-    flow.redirect_uri = url_for("google_callback", _external=True)
+    flow.redirect_uri = url_for("auth.google_callback", _external=True)
     flow.fetch_token(authorization_response=request.url)
 
     credentials = flow.credentials
@@ -325,12 +325,12 @@ def google_callback():
             print(error)
             print("Can't add new user to Database")
             flash(error, category="error")
-            return redirect(url_for("login_index"))
+            return redirect(url_for("auth.login_index"))
 
         user = Users.query.filter_by(google_id=id_info.get("sub")).first()
 
     login_user(user, remember=True)
-    return redirect_next_url(fallback=url_for("user_profile"))
+    return redirect_next_url(fallback=url_for("auth.user_profile"))
 
 
 def allowed_file(filename):

@@ -201,7 +201,7 @@ def delete_internship():
     try:
         db.session.delete(internship)
         db.session.commit()
-        return redirect(url_for("internships_index"))
+        return redirect(url_for("internships.internships_index"))
     except:
         flash("При удалении стажировки произошла ошибка.")
         return render_template(
@@ -215,7 +215,7 @@ def update_internship():
     user = ()
     internship = Internships.query.get(id)
     if not internship:
-        return redirect(url_for("internships_index"))
+        return redirect(url_for("internships.internships_index"))
     upd_internship = AddInternship(obj=internship)
 
     upd_internship.format.choices = [
@@ -327,7 +327,7 @@ def update_internship():
         internship.company_id = company_id[0]
         try:
             db.session.commit()
-            return redirect(url_for("page_internship", id=internship.id))
+            return redirect(url_for("internships.page_internship", id=internship.id))
         except:
             return "Что-то пошло не так"
     else:

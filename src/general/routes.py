@@ -23,7 +23,7 @@ def index():
 
 @bp.route("/index.html")
 def index_html():
-    return redirect(url_for("index"))
+    return redirect(url_for("general.index"))
 
 
 @bp.route("/bachelor/admission.html")

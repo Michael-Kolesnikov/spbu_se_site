@@ -184,7 +184,7 @@ def delete_theme():
     theme = DiplomaThemes.query.filter_by(id=theme_id).first_or_404()
 
     if theme.author.id != current_user.id:
-        return redirect(url_for("diplomas_index"))
+        return redirect(url_for("diplomas.diplomas_index"))
 
     db.session.delete(theme)
     db.session.commit()
