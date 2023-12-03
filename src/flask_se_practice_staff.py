@@ -37,7 +37,7 @@ from se_models import (
 )
 
 from templates.practice.staff.templates import PracticeStaffTemplates
-from templates.notification.templates import NotificationTemplates
+from src.admin.notification_template import NotificationTemplates
 
 DATE_AND_TIME_FORMAT = "%d.%m.%Y %H:%M"
 

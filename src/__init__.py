@@ -6,6 +6,8 @@ from pathlib import Path
 from flaskext.markdown import Markdown
 from flask_migrate import Migrate
 from flask_simplemde import SimpleMDE
+from flask_admin import Admin
+from src.admin.views import SeAdminIndexView
 from src.general import bp as general_bp
 from src.summer_schools import bp as school_bp
 from src.scholarships import bp as scholarship_bp
@@ -31,6 +33,7 @@ def create_app(config_name):
     # Init markdown
     Markdown(app, extensions=["tables"])
     migrate = Migrate(app, db, render_as_batch=True)
+    admin = Admin(app, index_view=SeAdminIndexView(), template_mode="bootstrap4")
     SimpleMDE(app)
     app.register_blueprint(errors_bp)
     app.register_blueprint(general_bp)

@@ -47,7 +47,7 @@ from se_models import (
     add_mail_notification,
 )
 from templates.practice.student.templates import PracticeStudentTemplates
-from templates.notification.templates import NotificationTemplates
+from src.admin.notification_template import NotificationTemplates
 from flask_se_practice_config import (
     TEXT_UPLOAD_FOLDER,
     REVIEW_UPLOAD_FOLDER,

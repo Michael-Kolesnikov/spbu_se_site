@@ -1,22 +1,19 @@
-# -*- coding: utf-8 -*-
-
-from flask import redirect, url_for, session, render_template, current_app
-from flask_admin import AdminIndexView, expose
+from flask import redirect, url_for, render_template, session, current_app
+from flask_login import current_user
 from flask_admin.contrib.sqla import ModelView
 from flask_admin.contrib.sqla.fields import QuerySelectField
-from flask_login import current_user
-from wtforms import TextAreaField, SelectField
-
-from se_models import (
-    db,
+from src.models import (
     Users,
     Staff,
     Worktype,
     Courses,
     AreasOfStudy,
     DiplomaThemes,
-    add_mail_notification,
 )
+from src.notification import add_mail_notification
+from src.extensions import db
+from wtforms import TextAreaField, SelectField
+from flask_admin import AdminIndexView, expose
 from src.admin.notification_template import NotificationTemplates
 
 ADMIN_ROLE_LEVEL = 5
@@ -36,7 +33,7 @@ class SeAdminModelView(ModelView):
             return False
 
     def inaccessible_callback(self, name, **kwargs):
-        return redirect(url_for("login_index"))
+        return redirect(url_for("auth.login_index"))
 
 
 class SeAdminModelViewThesis(SeAdminModelView):
@@ -91,7 +88,7 @@ class SeAdminModelViewReviewer(ModelView):
             return False
 
     def inaccessible_callback(self, name, **kwargs):
-        return redirect(url_for("login_index"))
+        return redirect(url_for("auth.login_index"))
 
     pass
 
@@ -110,7 +107,7 @@ class SeAdminIndexView(AdminIndexView):
             return False
 
     def inaccessible_callback(self, name, **kwargs):
-        return redirect(url_for("login_index"))
+        return redirect(url_for("auth.login_index"))
 
 
 class SeAdminModelViewUsers(SeAdminModelView):

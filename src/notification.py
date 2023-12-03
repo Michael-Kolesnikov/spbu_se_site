@@ -1,5 +1,5 @@
 from src.extensions import db
-from models import Users, Notification
+from src.models import Users, Notification
 
 
 def add_mail_notification(user_id, title, content):

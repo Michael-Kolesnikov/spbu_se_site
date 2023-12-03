@@ -45,7 +45,7 @@ from se_models import (
 
 from flask_se_config import get_thesis_type_id_string
 from templates.practice.admin.templates import PracticeAdminTemplates
-from templates.notification.templates import NotificationTemplates
+from src.admin.notification_template import NotificationTemplates
 from flask_se_practice_yandex_disk import handle_yandex_table
 from flask_se_practice_config import (
     TABLE_COLUMNS,
