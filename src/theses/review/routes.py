@@ -20,7 +20,7 @@ from src.models import (
 from flask import render_template, request, redirect, flash, url_for, current_app
 from src.extensions import db
 from transliterate import translit
-
+from src.notification import add_mail_notification
 
 # Global variables
 UPLOAD_FOLDER = "static/thesis/onreview/"
