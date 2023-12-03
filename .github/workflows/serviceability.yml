@@ -20,5 +20,4 @@ jobs:
       - name: Install requirements # Check problems with dependencies
         run: python -m pip install -r requirements.txt
       - name: Init databases # Check basic scenario -- database initialization
-        working-directory: src
-        run: python flask_se.py init
+        run: python app.py init
