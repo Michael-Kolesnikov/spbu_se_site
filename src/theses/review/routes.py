@@ -16,8 +16,6 @@ from src.models import (
     ThesisOnReview,
     Reviewer,
     ThesisReview,
-    Users,
-    Notification,
 )
 from flask import render_template, request, redirect, flash, url_for, current_app
 from src.extensions import db
@@ -65,15 +63,6 @@ def allowed_file(filename):
 
 def get_thesis_type_id_string(id):
     return current_app.config["type_id_string"][id - 1]
-
-
-def add_mail_notification(user_id, title, content):
-    if not Users.query.filter_by(id=user_id).first():
-        return
-
-    n = Notification(recipient=user_id, title=title, content=content)
-    db.session.add(n)
-    db.session.commit()
 
 
 bp.add_url_rule("/review/", methods=["GET"], view_func=thesis_review_index)
