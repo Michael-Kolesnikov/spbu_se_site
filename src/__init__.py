@@ -17,6 +17,7 @@ from src.auth import bp as auth_bp
 from src.news import bp as news_bp
 from src.diplomas import bp as diplomas_bp
 from src.theses import bp as theses_bp
+from src.practice import bp as practice_bp
 
 
 def create_app(config_name):
@@ -44,4 +45,5 @@ def create_app(config_name):
     app.register_blueprint(news_bp)
     app.register_blueprint(diplomas_bp)
     app.register_blueprint(theses_bp)
+    app.register_blueprint(practice_bp)
     return app
