@@ -61,56 +61,55 @@ class Config(object):
         "Pre_graduate_practice",
     ]
     # Yandex disk
+    YANDEX_CLIENT_ID = "10e079e42b49492295a39e2767e7b049"
+    YANDEX_SECRET_FILE = os.path.join(
+        pathlib.Path(__file__).parent, "configs/flask_se_practice_yandex_secret.conf"
+    )
+    if os.path.exists(YANDEX_SECRET_FILE):
+        with open(YANDEX_SECRET_FILE, "r") as file:
+            YANDEX_SECRET = file.read().rstrip()
+    else:
+        YANDEX_SECRET = ""
 
+    YANDEX_AUTHORIZE_URL_TEMPLATE = Template(
+        "https://oauth.yandex.ru/authorize?response_type=code"
+        "&client_id=$yandex_client_id&redirect_uri=$redirect_uri"
+    )
+    YANDEX_GET_TOKEN_URL = "https://oauth.yandex.ru/token"
 
-YANDEX_CLIENT_ID = "10e079e42b49492295a39e2767e7b049"
-YANDEX_SECRET_FILE = os.path.join(
-    pathlib.Path(__file__).parent, "configs/flask_se_practice_yandex_secret.conf"
-)
-if os.path.exists(YANDEX_SECRET_FILE):
-    with open(YANDEX_SECRET_FILE, "r") as file:
-        YANDEX_SECRET = file.read().rstrip()
-else:
-    YANDEX_SECRET = ""
+    TABLE_COLUMNS = {
+        "name": "ФИО",
+        "how_to_contact": "Способ оперативной связи (почта, Teams, Telegram, ...)",
+        "supervisor": "Научный руководитель",
+        "consultant": "Консультант (если есть), полностью ФИО, должность и компания",
+        "theme": "Тема",
+        "text": "Текст",
+        "supervisor_review": "Отзыв научника",
+        "reviewer_review": "Отзыв консультанта",
+        "code": "Код",
+        "committer": "Имя коммитера",
+        "presentation": "Презентация",
+    }
 
-YANDEX_AUTHORIZE_URL_TEMPLATE = Template(
-    "https://oauth.yandex.ru/authorize?response_type=code"
-    "&client_id=$yandex_client_id&redirect_uri=$redirect_uri"
-)
-YANDEX_GET_TOKEN_URL = "https://oauth.yandex.ru/token"
+    TEXT_UPLOAD_FOLDER = "static/practice/texts/"
+    REVIEW_UPLOAD_FOLDER = "static/practice/reviews/"
+    PRESENTATION_UPLOAD_FOLDER = "static/practice/slides/"
 
-TABLE_COLUMNS = {
-    "name": "ФИО",
-    "how_to_contact": "Способ оперативной связи (почта, Teams, Telegram, ...)",
-    "supervisor": "Научный руководитель",
-    "consultant": "Консультант (если есть), полностью ФИО, должность и компания",
-    "theme": "Тема",
-    "text": "Текст",
-    "supervisor_review": "Отзыв научника",
-    "reviewer_review": "Отзыв консультанта",
-    "code": "Код",
-    "committer": "Имя коммитера",
-    "presentation": "Презентация",
-}
+    ALLOWED_EXTENSIONS = {"pdf"}
 
-TEXT_UPLOAD_FOLDER = "static/practice/texts/"
-REVIEW_UPLOAD_FOLDER = "static/practice/reviews/"
-PRESENTATION_UPLOAD_FOLDER = "static/practice/slides/"
+    MIN_LENGTH_OF_TOPIC = 7
+    MIN_LENGTH_OF_GOAL = 20
+    MIN_LENGTH_OF_TASK = 15
 
-ALLOWED_EXTENSIONS = {"pdf"}
+    MIN_LENGTH_OF_FIELD_WAS_DONE = 10
+    MIN_LENGTH_OF_FIELD_PLANNED_TO_DO = 10
 
-MIN_LENGTH_OF_TOPIC = 7
-MIN_LENGTH_OF_GOAL = 20
-MIN_LENGTH_OF_TASK = 15
+    FORMAT_DATE_TIME = "%d.%m.%Y %H:%M"
 
-MIN_LENGTH_OF_FIELD_WAS_DONE = 10
-MIN_LENGTH_OF_FIELD_PLANNED_TO_DO = 10
+    # Folders for materials of archive theses
+    ARCHIVE_TEXT_FOLDER = "./static/thesis/texts/"
+    ARCHIVE_PRESENTATION_FOLDER = "./static/thesis/slides/"
+    ARCHIVE_REVIEW_FOLDER = "./static/thesis/reviews/"
 
-FORMAT_DATE_TIME = "%d.%m.%Y %H:%M"
-
-# Folders for materials of archive theses
-ARCHIVE_TEXT_FOLDER = "./static/thesis/texts/"
-ARCHIVE_PRESENTATION_FOLDER = "./static/thesis/slides/"
-ARCHIVE_REVIEW_FOLDER = "./static/thesis/reviews/"
 
 config = {"default": Config}
