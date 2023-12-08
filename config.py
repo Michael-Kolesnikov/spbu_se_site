@@ -1,6 +1,7 @@
 import os
 import pathlib
 from datetime import datetime
+from string import Template
 
 
 class Config(object):
