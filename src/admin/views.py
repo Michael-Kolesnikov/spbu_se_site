@@ -14,7 +14,7 @@ from src.notification import add_mail_notification
 from src.extensions import db
 from wtforms import TextAreaField, SelectField
 from flask_admin import AdminIndexView, expose
-from src.admin.notification_template import NotificationTemplates
+from src.notification import NotificationTemplates
 
 ADMIN_ROLE_LEVEL = 5
 REVIEW_ROLE_LEVEL = 3
