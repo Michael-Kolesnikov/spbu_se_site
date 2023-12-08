@@ -18,6 +18,25 @@ from src.news import bp as news_bp
 from src.diplomas import bp as diplomas_bp
 from src.theses import bp as theses_bp
 from src.practice import bp as practice_bp
+from src.models import (
+    Users,
+    Staff,
+    Thesis,
+    SummerSchool,
+    Posts,
+    DiplomaThemes,
+    CurrentThesis,
+)
+from src.admin.views import (
+    SeAdminModelViewUsers,
+    SeAdminModelViewStaff,
+    SeAdminModelViewThesis,
+    SeAdminModelViewSummerSchool,
+    SeAdminModelViewNews,
+    SeAdminModelViewDiplomaThemes,
+    SeAdminModelViewReviewDiplomaThemes,
+    SeAdminModelViewCurrentThesis,
+)
 
 
 def create_app(config_name):
@@ -34,8 +53,28 @@ def create_app(config_name):
     # Init markdown
     Markdown(app, extensions=["tables"])
     migrate = Migrate(app, db, render_as_batch=True)
-    admin = Admin(app, index_view=SeAdminIndexView(), template_mode="bootstrap4")
     SimpleMDE(app)
+    admin = Admin(app, index_view=SeAdminIndexView(), template_mode="bootstrap4")
+    admin.add_view(SeAdminModelViewUsers(Users, db.session))
+    admin.add_view(SeAdminModelViewStaff(Staff, db.session))
+    admin.add_view(SeAdminModelViewThesis(Thesis, db.session))
+    admin.add_view(SeAdminModelViewSummerSchool(SummerSchool, db.session))
+    admin.add_view(SeAdminModelViewNews(Posts, db.session))
+    admin.add_view(
+        SeAdminModelViewDiplomaThemes(
+            DiplomaThemes, db.session, endpoint="diplomathemes"
+        )
+    )
+    admin.add_view(
+        SeAdminModelViewReviewDiplomaThemes(
+            DiplomaThemes,
+            db.session,
+            endpoint="reviewdiplomathemes",
+            name="Review DiplomaThemes",
+        )
+    )
+    admin.add_view(SeAdminModelViewCurrentThesis(CurrentThesis, db.session))
+
     app.register_blueprint(errors_bp)
     app.register_blueprint(general_bp)
     app.register_blueprint(school_bp)
