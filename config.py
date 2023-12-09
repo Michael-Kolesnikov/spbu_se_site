@@ -111,5 +111,10 @@ class Config(object):
     ARCHIVE_PRESENTATION_FOLDER = "./static/thesis/slides/"
     ARCHIVE_REVIEW_FOLDER = "./static/thesis/reviews/"
 
+    TEXT = "text"
+    REVIEWER_REVIEW = "reviewer_review"
+    SUPERVISOR_REVIEW = "supervisor_review"
+    PRESENTATION = "slides"
+
 
 config = {"default": Config}
