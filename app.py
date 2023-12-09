@@ -4,7 +4,7 @@ import sys
 from src.extensions import db
 from src.extensions import init_db
 
-app = create_app('default')
+app = create_app("default")
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
