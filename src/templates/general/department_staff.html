@@ -61,7 +61,7 @@
                                     <a class="text-sm" href="mailto:{{person.contacts}}" itemprop="email">{{person.contacts}}</a>
                                 </div>
                                 <div class="col text-right">
-                                    <a href="{{ url_for ('general.theses_search', supervisor=person.id)}}" class="text-sm">Курсовые и ВКР</a>
+                                    <a href="{{ url_for ('theses.theses_search', supervisor=person.id)}}" class="text-sm">Курсовые и ВКР</a>
                                 </div>
                             </div>
                         </div>
